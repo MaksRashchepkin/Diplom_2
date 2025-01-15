@@ -1,12 +1,8 @@
 import requests
 import allure
-import data as data
+import data
 
-
-class BasePage():
-
-    def __init__(self, response):
-        self.response = response
+class BasePage:
 
     def post_method(self, endpoint, header, payload=None):
         self.response = requests.post(f'{data.URL}{endpoint}', headers=header, data=payload)
@@ -21,7 +17,7 @@ class BasePage():
         return self.response
 
     def get_method(self, endpoint, header):
-        self.response = requests.get(f'{data.URL}{endpoint}',  headers=header)
+        self.response = requests.get(f'{data.URL}{endpoint}', headers=header)
         return self.response
 
     @property
@@ -30,7 +26,7 @@ class BasePage():
 
     @property
     def return_error_msg(self):
-        return self.return_response_body['message']
+        return self.response.json().get('message', 'No message provided')
 
     @allure.step('Проверяем статус код')
     def assert_status_code(self, code):

@@ -33,8 +33,6 @@ def register_new_user_and_return_params():
         result.append(name)
         result.append(access_token)
         result.append(refresh_token)
-    else:
-        print("Регистрация провалена")
 
     # возвращаем список
     return result
@@ -53,7 +51,5 @@ def get_user_token():
     if response.status_code == 200:
         tokens.append(access_token)
         tokens.append(refresh_token)
-    else:
-        print("Вход не выполнен")
 
     return tokens
